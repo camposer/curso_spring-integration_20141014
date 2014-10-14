@@ -4,10 +4,10 @@
 	xmlns:int-file="http://www.springframework.org/schema/integration/file"
 	xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-2.2.xsd
 		http://www.springframework.org/schema/integration/file http://www.springframework.org/schema/integration/file/spring-integration-file-2.2.xsd
-		http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms-2.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
 	<context:annotation-config/>
@@ -20,7 +20,8 @@
 	<context:component-scan base-package="springintegration.ticketint.config"/>
 
 	<!-- Channels -->
-	<int:publish-subscribe-channel id="ticket"/>
+	<!-- int:publish-subscribe-channel id="ticket"/-->
+	<int-jms:publish-subscribe-channel id="ticket" topic-name="jms.ticket" connection-factory="connectionFactory"/>
 	<int:channel id="ticketPrioridadBaja"/>
 	<int:channel id="ticketPrioridadAlta"/>
 	<int:channel id="ticketDiscarded"/>

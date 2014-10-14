@@ -13,6 +13,7 @@ public class App
     public static void main( String[] args )
     {
     	AbstractApplicationContext ctx = new ClassPathXmlApplicationContext("ticket-ctx.xml");
+    	ctx.start();
     	ctx.getBean(TicketChannel.class).suscribir();
     	ctx.getBean(TicketPrioridadBajaChannel.class).suscribir();
     	ctx.getBean(TicketPrioridadAltaChannel.class).suscribir();

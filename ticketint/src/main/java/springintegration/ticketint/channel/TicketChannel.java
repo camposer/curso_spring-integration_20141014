@@ -5,18 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.integration.Message;
 import org.springframework.integration.MessagingException;
-import org.springframework.integration.channel.AbstractSubscribableChannel;
 import org.springframework.integration.core.MessageHandler;
+import org.springframework.integration.jms.SubscribableJmsChannel;
 import org.springframework.stereotype.Component;
 
 import springintegration.ticketint.to.Ticket;
 
 @Component
 public class TicketChannel implements MessageHandler {
-	private AbstractSubscribableChannel canal;
+	private SubscribableJmsChannel canal;
 	
 	@Value("#{ticket}") // spEl
-	public void setCanal(AbstractSubscribableChannel canal) {
+	public void setCanal(SubscribableJmsChannel canal) {
 		this.canal = canal;
 	}
 	
