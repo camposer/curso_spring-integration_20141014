@@ -17,6 +17,7 @@
 	<context:component-scan base-package="springintegration.ticketint.splitter"/>
 	<context:component-scan base-package="springintegration.ticketint.filter"/>
 	<context:component-scan base-package="springintegration.ticketint.router"/>
+	<context:component-scan base-package="springintegration.ticketint.aggregator"/>
 	<context:component-scan base-package="springintegration.ticketint.config"/>
 
 	<!-- Channels -->
@@ -26,6 +27,7 @@
 	<int:channel id="ticketPrioridadAlta"/>
 	<int:channel id="ticketDiscarded"/>
 	<int:channel id="ticketJson"/>
+	<int:publish-subscribe-channel id="ticketSplitted"/>
 	<!-- int-jms:channel id="ticketBackup" queue-name="jms.tmp"/ -->
 	
 	<!-- File consumer -->	
@@ -45,11 +47,17 @@
 	<int:splitter input-channel="ticket" output-channel="ticketSplitted" ref="ticketSplitter"/>
 
 	<!-- Filter -->
-	<int:filter input-channel="ticketSplitted" discard-channel="ticketDiscarded" output-channel="ticketFiltered" ref="ticketFilter" />
+	<int:filter input-channel="ticketSplitted" 
+		discard-channel="ticketDiscarded" 
+		output-channel="ticketFiltered" 
+		ref="ticketFilter" />
  	 
+ 	<!-- Aggregator -->
+	<int:aggregator input-channel="ticketSplitted" ref="ticketAggregator"/>
+
 	<!-- Router -->
 	<int:router input-channel="ticketFiltered" ref="ticketRouter" />
-
+	
 	<!-- Tickets to JSON -->
 	<!-- 
 	<int:object-to-json-transformer
