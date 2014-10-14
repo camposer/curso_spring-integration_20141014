@@ -14,12 +14,14 @@
 	
 	<context:component-scan base-package="springintegration.ticketint.channel"/>
 	<context:component-scan base-package="springintegration.ticketint.service"/>
+	<context:component-scan base-package="springintegration.ticketint.splitter"/>
+	<context:component-scan base-package="springintegration.ticketint.router"/>
 
 	<!-- Channels -->
-	<int:channel id="ticket"/>
-	<!-- 
+	<int:publish-subscribe-channel id="ticket"/>
 	<int:channel id="ticketPrioridadBaja"/>
 	<int:channel id="ticketPrioridadAlta"/>
+	<!-- 
 	<int-jms:channel id="backedupChannel" queue-name="jms.tmp"/>
 	 -->
 	<!-- int:channel id="ticketJson"/-->
@@ -36,20 +38,18 @@
 		id="transformer" input-channel="input" output-channel="output" />
 	<int:service-activator 
 		input-channel="output" output-channel="ticket" ref="byteToTicketService" />
-
-	<!-- int-file:outbound-channel-adapter channel="ticket" directory="file:output"/--><!-- File Writer -->
+<!-- 		
+	<int-file:outbound-channel-adapter channel="ticket" directory="file:output"/>
+-->
 
 	<!-- Tickets to JSON and Reader -->
 	<!-- int:object-to-json-transformer
 		input-channel="ticket" output-channel="ticketJson" /-->
 
 	<!-- Splitter -->
-	<!-- 
 	<int:splitter input-channel="ticket" output-channel="ticketSplitted" ref="ticketSplitter"/>
- 	-->
- 	
+ 	 
 	<!-- Router -->
-	<!-- 
 	<int:router input-channel="ticketSplitted" ref="ticketRouter" />
-	 -->
 </beans>
+
