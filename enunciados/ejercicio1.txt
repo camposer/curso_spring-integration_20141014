@@ -4,7 +4,11 @@ http://docs.spring.io/spring-integration/docs/3.0.5.RELEASE/reference/html/messa
 
 2.- Escribir un fichero CSV con el total de tickets manejados, el formato debe ser: totalTickets,TOTAL
 
+http://docs.spring.io/spring-integration/docs/3.0.5.RELEASE/reference/html/files.html#file-writing
+
 3.- Refactorizar el ejercicio de tickets para que ahora extraiga los datos de una tabla en BD (utilizar Derby) ** 
+
+http://docs.spring.io/spring-integration/docs/3.0.5.RELEASE/reference/html/jdbc.html
 
 ** Previa explicación
 
