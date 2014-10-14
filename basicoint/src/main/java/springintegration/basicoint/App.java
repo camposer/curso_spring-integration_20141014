@@ -41,12 +41,13 @@ public class App
         hmpsc2.suscribir();
         HolaMundoPSChannel hmpsc3 = ctx.getBean(HolaMundoPSChannel.class);
         hmpsc3.suscribir();
-        
-        hmpsc1.enviar("Para todos");
-        
+
         // DirectChannel - HolaMundoSalidaChannel
         HolaMundoSalidaChannel hmsc = ctx.getBean(HolaMundoSalidaChannel.class);
         hmsc.suscribir();
+
+        hmpsc1.enviar("Para todos");
+        
     }
     
     public static class HolaMundoQueueChannelThread implements Runnable {
