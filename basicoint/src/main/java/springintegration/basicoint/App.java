@@ -3,9 +3,10 @@ package springintegration.basicoint;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import springintegration.basicoint.channel.HolaMundoDirectChannel;
+import springintegration.basicoint.channel.HolaMundoDirectoChannel;
 import springintegration.basicoint.channel.HolaMundoPSChannel;
 import springintegration.basicoint.channel.HolaMundoQueueChannel;
+import springintegration.basicoint.channel.HolaMundoSalidaChannel;
 
 /**
  * Hello world!
@@ -18,7 +19,7 @@ public class App
         ApplicationContext ctx = new ClassPathXmlApplicationContext("basico-ctx.xml");
         
         // DirectChannel
-        HolaMundoDirectChannel hmdc = ctx.getBean(HolaMundoDirectChannel.class);
+        HolaMundoDirectoChannel hmdc = ctx.getBean(HolaMundoDirectoChannel.class);
         hmdc.suscribir(); // Suscribiendo para leer
         
         hmdc.enviar("Hola");
@@ -42,6 +43,10 @@ public class App
         hmpsc3.suscribir();
         
         hmpsc1.enviar("Para todos");
+        
+        // DirectChannel - HolaMundoSalidaChannel
+        HolaMundoSalidaChannel hmsc = ctx.getBean(HolaMundoSalidaChannel.class);
+        hmsc.suscribir();
     }
     
     public static class HolaMundoQueueChannelThread implements Runnable {

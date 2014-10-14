@@ -5,14 +5,13 @@ import org.springframework.integration.Message;
 import org.springframework.integration.MessagingException;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.core.MessageHandler;
-import org.springframework.integration.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HolaMundoDirectChannel implements MessageHandler {
+public class HolaMundoSalidaChannel implements MessageHandler {
 	private DirectChannel canal;
 
-	@Value("#{canalDirecto}")
+	@Value("#{canalSalida}")
 	public void setCanal(DirectChannel canal) {
 		this.canal = canal;
 	}
@@ -21,11 +20,7 @@ public class HolaMundoDirectChannel implements MessageHandler {
 		canal.subscribe(this);
 	}
 
-	public void enviar(String mensaje) {
-		canal.send(MessageBuilder.withPayload(mensaje).build());
-	}
-
 	public void handleMessage(Message<?> msg) throws MessagingException {
-		System.out.println("HolaMundoDirectReader: " + msg);
+		System.out.println("HolaMundoSalidaChannel: " + msg);
 	}
 }
