@@ -1,0 +1,11 @@
+1.- Agregar un filtro al ejercicio de tickets que excluya los tickets anteriores a marzo del 2013.
+
+http://docs.spring.io/spring-integration/docs/3.0.5.RELEASE/reference/html/messaging-routing-chapter.html#filter
+
+2.- Escribir un fichero CSV con el total de tickets manejados, el formato debe ser: totalTickets,TOTAL
+
+3.- Refactorizar el ejercicio de tickets para que ahora extraiga los datos de una tabla en BD (utilizar Derby) ** 
+
+** Previa explicación
+
+
