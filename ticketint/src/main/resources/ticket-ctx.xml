@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:int-file="http://www.springframework.org/schema/integration/file"
+	xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/integration/file http://www.springframework.org/schema/integration/file/spring-integration-file-2.2.xsd
+		http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<context:annotation-config/>
+	
+	<context:component-scan base-package="springintegration.ticketint.channel"/>
+	<context:component-scan base-package="springintegration.ticketint.service"/>
+
+	<!-- Channels -->
+	<int:channel id="ticket"/>
+	<!-- 
+	<int:channel id="ticketPrioridadBaja"/>
+	<int:channel id="ticketPrioridadAlta"/>
+	<int-jms:channel id="backedupChannel" queue-name="jms.tmp"/>
+	 -->
+	<!-- int:channel id="ticketJson"/-->
+	
+	<!-- File consumer -->	
+	<int-file:inbound-channel-adapter id="filesIn"
+		channel="input" directory="file:input" prevent-duplicates="true"
+		filename-pattern="ticket*.csv">
+		<int:poller fixed-rate="1000"/>
+	</int-file:inbound-channel-adapter>
+
+	<!-- File to bytes and file -->	
+	<int-file:file-to-bytes-transformer
+		id="transformer" input-channel="input" output-channel="output" />
+	<int:service-activator 
+		input-channel="output" output-channel="ticket" ref="byteToTicketService" />
+
+	<!-- int-file:outbound-channel-adapter channel="ticket" directory="file:output"/--><!-- File Writer -->
+
+	<!-- Tickets to JSON and Reader -->
+	<!-- int:object-to-json-transformer
+		input-channel="ticket" output-channel="ticketJson" /-->
+
+	<!-- Splitter -->
+	<!-- 
+	<int:splitter input-channel="ticket" output-channel="ticketSplitted" ref="ticketSplitter"/>
+ 	-->
+ 	
+	<!-- Router -->
+	<!-- 
+	<int:router input-channel="ticketSplitted" ref="ticketRouter" />
+	 -->
+</beans>
