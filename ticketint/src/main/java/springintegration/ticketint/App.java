@@ -4,6 +4,7 @@ import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import springintegration.ticketint.channel.TicketChannel;
+import springintegration.ticketint.channel.TicketDiscardedChannel;
 import springintegration.ticketint.channel.TicketPrioridadAltaChannel;
 import springintegration.ticketint.channel.TicketPrioridadBajaChannel;
 
@@ -15,5 +16,6 @@ public class App
     	ctx.getBean(TicketChannel.class).suscribir();
     	ctx.getBean(TicketPrioridadBajaChannel.class).suscribir();
     	ctx.getBean(TicketPrioridadAltaChannel.class).suscribir();
+    	ctx.getBean(TicketDiscardedChannel.class).suscribir();
     }
 }
