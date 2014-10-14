@@ -1,6 +1,7 @@
 package springintegration.basicoint.channel;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.integration.Message;
 import org.springframework.integration.MessagingException;
 import org.springframework.integration.channel.PublishSubscribeChannel;
@@ -9,6 +10,7 @@ import org.springframework.integration.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 
 @Component
+@Scope("prototype")
 public class HolaMundoPSChannel implements MessageHandler {
 	private PublishSubscribeChannel canal;
 
